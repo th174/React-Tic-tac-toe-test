@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
-import X from './X.png'
-import O from './O.png'
 import './App.css';
 import Game from "./Game";
+import * as zoid from "zoid";
 
-const size =  5;
-const symbols = [' ',
-    <img alt={'X'} style={{maxWidth: '80%', height: 'auto',}} src={X}/>,
-    <img alt={'O'} style={{maxWidth: '80%', height: 'auto',}} src={O}/>];
+
+export const ExternalTicTacToe = zoid.create({
+
+    tag: 'tic-tac-toe',
+
+    url: 'http://localhost:8000/',
+});
 
 export default class App extends Component {
     render() {
@@ -18,7 +20,8 @@ export default class App extends Component {
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h1 className="App-title">Welcome to React</h1>
                 </header>
-                <Game symbols={symbols} size={size}/>
+                <Game symbols={window.xprops.symbols} size={window.xprops.size}/>
+                <button onClick={() => window.xprops.callBack()}>Test Callback</button>
             </div>
         );
     }
